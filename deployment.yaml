@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cicd-service
+  name: cicd-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cicd-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cicd-service
+    spec:
+      containers:
+        - image: tewemit/cicd-service
+          name: cicd-service
+          imagePullPolicy: Always #"IfNotPresent" #Never
+          resources: {}
+          env:
+            - name: DB_HOST
+              value: "postgres:5432"
+            - name: PAYMENT_DB_NAME
+              value: "cicdservice"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "1"
+
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cicd-service
+  name: cicd-service
+spec:
+  type: NodePort #ClusterIP #LoadBalancer #NodePort
+  ports:
+    - name: 8082-8082
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+  selector:
+    app: cicd-service
+status:
+  loadBalancer: {}
