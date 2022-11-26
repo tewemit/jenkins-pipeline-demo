@@ -1,10 +1,14 @@
 //Jenkinsfile (Declarative Pipeline)
 /* Requires the Docker Pipeline plugin */
 pipeline {
-    agent any
+agent {
+        docker {
+            image 'maven:3.8.4-openjdk-17'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
     stages {
         stage('build') {
-            agent { docker { image 'maven:3.8.6-openjdk-11-slim' } }
             steps {
                 sh 'echo "Hello World. Starting build steps"'
                 sh 'mvn clean package'
