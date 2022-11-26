@@ -13,5 +13,5 @@ pipeline {
                 '''
             }
         }
-    }dcda91ae7f14
+    }
 }
