@@ -43,7 +43,7 @@ metadata:
     app: cicd-service
   name: cicd-service
 spec:
-  type: NodePort #ClusterIP #LoadBalancer #NodePort
+  type: LoadBalancer #ClusterIP #LoadBalancer #NodePort
   ports:
     - name: 8082-8082
       port: 8082
