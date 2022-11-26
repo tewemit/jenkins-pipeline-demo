@@ -14,7 +14,9 @@ agent {
                 sh 'mvn clean package'
                 sh '''
                     echo "Multiline shell steps works too"
-                    ls -lah
+                    docker build -t cicd-demo .
+                    docker tag demo tewemit/cicd-demo
+                    docker push tewemit/cicd-demo
                 '''
             }
         }
