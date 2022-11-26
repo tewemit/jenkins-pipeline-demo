@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $# -gt 0 ] && [ $1 = "-b" ]
+if [[ $# -gt 0  &&  $1 = "-b" || $2 = "-b"  ]]
 then
   mvn clean package -DskipTests
   docker build . -t cicd-demo
@@ -11,7 +11,7 @@ else
 fi
 
 # deploy to kubernetes
-if [ $# -gt 1 ] && [ $2 = "-d" ]
+if [[ $# -gt 0  &&  $1 = "-d" || $2 = "-d" ]]
 then
 kubectl delete svc cicd-service
 kubectl delete deployment cicd-service
