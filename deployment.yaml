@@ -18,7 +18,7 @@ spec:
         app: cicd-service
     spec:
       containers:
-        - image: tewemit/cicd-service
+        - image: tewemit/cicd-demo
           name: cicd-service
           imagePullPolicy: Always #"IfNotPresent" #Never
           resources: {}
