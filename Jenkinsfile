@@ -9,11 +9,6 @@ agent {
     }
 
     stages {
-        stage('Initialize PATH')
-            {
-                def dockerHome = tool 'docker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
         stage('Maven package') {
             steps {
                 sh 'echo "Hello, Starting maven package"'
@@ -24,6 +19,7 @@ agent {
             }
         }
         stage('Docker build ') {
+            agent any
             steps {
                 sh 'echo "Starting docker build steps"'
                 sh '''
@@ -35,6 +31,7 @@ agent {
             }
         }
         stage('Push docker image ') {
+            agent any
             steps {
                 script {
                 withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd' )])
