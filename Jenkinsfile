@@ -16,7 +16,8 @@ agent {
                     echo "Multiline shell steps works too"
                 '''
             }
-            stage('Docker build ') {
+        }
+        stage('Docker build ') {
             steps {
                 sh 'echo "Hello World. Starting build steps"'
                 sh 'mvn clean package'
@@ -27,9 +28,10 @@ agent {
 
                 '''
             }
-            stage('Push docker image ') {
+        }
+        stage('Push docker image ') {
             steps {
-                script{
+                script {
                 withCredentials([string(credentialsId: dockerhubpwd, variable: dockerhubpwd )])
                 sh '''
                     echo "Pushing image"
