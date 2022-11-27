@@ -8,7 +8,15 @@ agent {
         }
     }
     stages {
-        stage('build') {
+        stage('Maven package') {
+            steps {
+                sh 'echo "Hello, Starting maven package"'
+                sh 'mvn clean package'
+                sh '''
+                    echo "Multiline shell steps works too"
+                '''
+            }
+            stage('Docker build ') {
             steps {
                 sh 'echo "Hello World. Starting build steps"'
                 sh 'mvn clean package'
@@ -16,8 +24,20 @@ agent {
                     echo "Multiline shell steps works too"
                     docker build -t cicd-demo .
                     docker tag demo tewemit/cicd-demo
-                    docker push tewemit/cicd-demo
+
                 '''
+            }
+            stage('Push docker image ') {
+            steps {
+                script{
+                withCredentials([string(credentialsId: dockerhubpwd, variable: dockerhubpwd )])
+                sh '''
+                    echo "Pushing image"
+                    docker login -u tewe_mit@hotmail.com ${dockerhubpwd}
+                    docker push tewemit/cicd-demo
+                    '''
+                }
+
             }
         }
     }
