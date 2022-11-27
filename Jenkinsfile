@@ -34,7 +34,7 @@ agent {
                 withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd' )])
                 sh '''
                     echo "Pushing image"
-                    docker login -u tewe_mit@hotmail.com -p ${dockerhubpwd}
+                    docker login -u tewemit -p ${dockerhubpwd}
                     docker push tewemit/cicd-demo
                     '''
                 }
