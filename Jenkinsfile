@@ -36,8 +36,16 @@ pipeline {
             steps{
                 /* script{
                     kubernetesDeploy (configs: 'deployment.yaml',kubeconfigId: 'k8sconfigpwd')
-                } */
-                sh 'kubectl apply -f deployment.yaml'
+                }
+                // or next one
+
+                stage('Apply Kubernetes files') {
+                    withKubeConfig([credentialsId: 'kubuser', serverUrl: 'https://api.k8s.my-company.com']) {
+                      sh 'kubectl apply -f deployment.yaml'
+                    }
+                  }
+                   */
+                sh 'echo "We will do deployment to k8s next time. Bye"'
             }
         }
     }
