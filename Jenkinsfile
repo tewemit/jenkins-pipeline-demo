@@ -31,7 +31,7 @@ agent {
         stage('Push docker image ') {
             steps {
                 script {
-                withCredentials([string(credentialsId: dockerhubpwd, variable: dockerhubpwd )])
+                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd' )])
                 sh '''
                     echo "Pushing image"
                     docker login -u tewe_mit@hotmail.com -p ${dockerhubpwd}
