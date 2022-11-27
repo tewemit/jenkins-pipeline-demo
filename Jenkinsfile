@@ -19,8 +19,7 @@ agent {
         }
         stage('Docker build ') {
             steps {
-                sh 'echo "Hello World. Starting build steps"'
-                sh 'mvn clean package'
+                sh 'echo "Starting docker build steps"'
                 sh '''
                     echo "Multiline shell steps works too"
                     docker build -t cicd-demo .
