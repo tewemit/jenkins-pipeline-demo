@@ -31,7 +31,7 @@ agent {
             }
         }
         stage('Push docker image ') {
-            agent any
+
             steps {
                 script {
                 withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd' )])
