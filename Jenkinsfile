@@ -19,7 +19,7 @@ agent {
             }
         }
         stage('Docker build ') {
-            agent any
+
             steps {
                 sh 'echo "Starting docker build steps"'
                 sh '''
