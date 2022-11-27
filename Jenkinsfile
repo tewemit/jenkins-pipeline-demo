@@ -7,6 +7,11 @@ agent {
             args '-v $HOME/.m2:/root/.m2'
         }
     }
+    stage('Initialize PATH')
+        {
+            def dockerHome = tool 'docker'
+            env.PATH = "${dockerHome}/bin:${dockerHome}/bin:${env.PATH}"
+        }
     stages {
         stage('Maven package') {
             steps {
